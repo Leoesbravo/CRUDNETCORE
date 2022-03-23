@@ -5,8 +5,6 @@ namespace PL.Controllers
 {
     public class UsuarioController : Controller
     {
-        //private readonly LEscogidoNETCOREContext context;gggw
-        //8520147899
         public ActionResult GetAll()
         {
             ML.Result result = BL.Usuario.GetAll();

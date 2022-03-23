@@ -34,6 +34,8 @@
                         <td>Apellido Materno</td>
                         <td>UserName</td>
                         <td>Rol</td>
+                        <td>Email</td>
+                        <td>CURP</td>
                         <td>Eliminar</td>
 
                     </tr>
@@ -49,6 +51,8 @@
                             <td>@usuario.ApellidoMaterno</td>
                             <td>@usuario.UserName</td>
                             <td>@usuario.Rol.IdRol</td>
+                            <td>@usuario.Email</td>
+                            <td>@usuario.CURP</td>
 
                             <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Usuario", new { IdUsuario = usuario.IdUsuario })" onclick="return confirm('¿Estas seguro que deseas eliminar este registro?');"></a></td>
                         </tr>

@@ -15,7 +15,7 @@ namespace BL
             try
             {
 
-                using (DL.LEscogidoNETCOREContext context = new DL.LEscogidoNETCOREContext())
+                using (DLAzure.lbravoContext context = new DLAzure.lbravoContext())
                 {
                     var query = context.Rols.FromSqlRaw("RolGetAll").ToList();
 

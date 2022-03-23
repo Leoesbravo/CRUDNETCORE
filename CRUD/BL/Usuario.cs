@@ -17,7 +17,7 @@ namespace BL
             try
             {
 
-                using (DL.LEscogidoNETCOREContext context = new DL.LEscogidoNETCOREContext())
+                using (DLAzure.lbravoContext  context = new DLAzure.lbravoContext())
                 {
                     var query = context.Usuarios.FromSqlRaw("UsuarioGetAll").ToList();
 
@@ -33,8 +33,19 @@ namespace BL
                             usuario.ApellidoPaterno = obj.ApellidoPaterno;
                             usuario.ApellidoMaterno = obj.ApellidoMaterno;
 
+
                             usuario.Rol = new ML.Rol();
                             usuario.Rol.IdRol = obj.IdRol.Value;
+
+                            usuario.FechaNacimiento = obj.FechaNacimiento.Value.ToString("dd/MM/yyyy");
+                            usuario.Password = obj.Password;
+                            usuario.Email = obj.Email;
+                            usuario.Sexo = obj.Sexo;
+                            usuario.Telefono = obj.Telefono;
+                            usuario.Celular = obj.Celular;
+                            usuario.Estatus = obj.Estatus;
+                            usuario.CURP = obj.Curp;
+                            usuario.Imagen = obj.Imagen;
 
                             result.Objects.Add(usuario);
                         }
@@ -61,7 +72,7 @@ namespace BL
 
             try
             {
-                using (DL.LEscogidoNETCOREContext context = new DL.LEscogidoNETCOREContext())
+                using (DLAzure.lbravoContext context = new DLAzure.lbravoContext())
                 {
                     var query = context.Usuarios.FromSqlRaw($"UsuarioGetById {IdUsuario}").ToList();
                     result.Object = new List<object>();
@@ -79,6 +90,16 @@ namespace BL
 
                             usuario.Rol = new ML.Rol();
                             usuario.Rol.IdRol = obj.IdRol.Value;
+
+                            usuario.FechaNacimiento = obj.FechaNacimiento.Value.ToString("dd/MM/yyyy");
+                            usuario.Password = obj.Password;
+                            usuario.Email = obj.Email;
+                            usuario.Sexo = obj.Sexo;
+                            usuario.Telefono = obj.Telefono;
+                            usuario.Celular = obj.Celular;
+                            usuario.Estatus = obj.Estatus;
+                            usuario.CURP = obj.Curp;
+                            usuario.Imagen = obj.Imagen;
 
                             result.Object = usuario;
                             result.Correct = true;
@@ -105,7 +126,7 @@ namespace BL
                 using (DL.LEscogidoNETCOREContext context = new DL.LEscogidoNETCOREContext())
                 {
 
-                    var query = context.Database.ExecuteSqlRaw($"UsuarioAdd {usuario.Nombre},  {usuario.ApellidoPaterno}, {usuario.ApellidoMaterno}, {usuario.UserName},  {usuario.Rol.IdRol}");
+                    var query = context.Database.ExecuteSqlRaw($"UsuarioAdd {usuario.Nombre},  {usuario.ApellidoPaterno}, {usuario.ApellidoMaterno}, {usuario.UserName},  {usuario.Rol.IdRol}, {usuario.FechaNacimiento}, {usuario.Password},  {usuario.Email}, {usuario.Telefono}, {usuario.Celular},  {usuario.Sexo},  {usuario.Estatus}, {usuario.CURP}, {usuario.Imagen}");
 
 
                     if (query >= 1)
