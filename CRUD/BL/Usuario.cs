@@ -18,6 +18,7 @@ namespace BL
             {
 
                 using (DLAzure.lbravoContext  context = new DLAzure.lbravoContext())
+                //using (DL.LEscogidoNETCOREContext context = new DL.LEscogidoNETCOREContext())
                 {
                     var query = context.Usuarios.FromSqlRaw("UsuarioGetAll").ToList();
 
@@ -123,10 +124,10 @@ namespace BL
 
             try
             {
-                using (DL.LEscogidoNETCOREContext context = new DL.LEscogidoNETCOREContext())
+                using (DLAzure.lbravoContext  context = new DLAzure.lbravoContext())
                 {
 
-                    var query = context.Database.ExecuteSqlRaw($"UsuarioAdd {usuario.Nombre},  {usuario.ApellidoPaterno}, {usuario.ApellidoMaterno}, {usuario.UserName},  {usuario.Rol.IdRol}, {usuario.FechaNacimiento}, {usuario.Password},  {usuario.Email}, {usuario.Telefono}, {usuario.Celular},  {usuario.Sexo},  {usuario.Estatus}, {usuario.CURP}, {usuario.Imagen}");
+                    var query = context.Database.ExecuteSqlRaw($"UsuarioAdd {usuario.UserName},  {usuario.ApellidoPaterno}, {usuario.ApellidoMaterno}, {usuario.Email},  {usuario.Sexo}, {usuario.Telefono}, {usuario.Celular},  {usuario.FechaNacimiento}, {usuario.CURP}, {usuario.Imagen},  {usuario.Direccion.Calle},  {usuario.Direccion.NumeroExterior}, {usuario.Direccion.NumeroInterior}, {usuario.Direccion.Colonia.IdColonia}, {usuario.Password}, {usuario.Rol.IdRol}");
 
 
                     if (query >= 1)

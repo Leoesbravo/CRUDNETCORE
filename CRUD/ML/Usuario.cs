@@ -25,5 +25,10 @@ namespace ML
         public string? CURP { get; set; }
         public byte[] Imagen { get; set; }
         public List<object>? Usuarios { get; set; }
+        public ML.Direccion Direccion { get; set; }
+        public ML.Colonia Colonia { get; set; }
+        public ML.Municipio Municipio { get; set; }
+        public ML.Estado Estado { get; set; }
+        public ML.Pais Pais { get; set; }
     }
 }

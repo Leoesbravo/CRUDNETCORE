@@ -16,6 +16,11 @@ namespace DL
         {
         }
 
+        public virtual DbSet<Colonium> Colonia { get; set; } = null!;
+        public virtual DbSet<Direccion> Direccions { get; set; } = null!;
+        public virtual DbSet<Estado> Estados { get; set; } = null!;
+        public virtual DbSet<Municipio> Municipios { get; set; } = null!;
+        public virtual DbSet<Pai> Pais { get; set; } = null!;
         public virtual DbSet<Rol> Rols { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
@@ -23,12 +28,106 @@ namespace DL
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=LAPTOP-RH1B3NSI; Database= LEscogidoNETCORE; Trusted_Connection=True; User ID=sa; Password=pass@word1;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Colonium>(entity =>
+            {
+                entity.HasKey(e => e.IdColonia)
+                    .HasName("PK__Colonia__A1580F661C8D5E89");
+
+                entity.Property(e => e.CodigoPostal)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdMunicipioNavigation)
+                    .WithMany(p => p.Colonia)
+                    .HasForeignKey(d => d.IdMunicipio)
+                    .HasConstraintName("FK__Colonia__IdMunic__3E52440B");
+            });
+
+            modelBuilder.Entity<Direccion>(entity =>
+            {
+                entity.HasKey(e => e.IdDireccion)
+                    .HasName("PK__Direccio__1F8E0C764A53D757");
+
+                entity.ToTable("Direccion");
+
+                entity.Property(e => e.Calle)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumeroExterior)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumeroInterior)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdColoniaNavigation)
+                    .WithMany(p => p.Direccions)
+                    .HasForeignKey(d => d.IdColonia)
+                    .HasConstraintName("FK__Direccion__IdCol__412EB0B6");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Direccions)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__Direccion__IdUsu__4222D4EF");
+            });
+
+            modelBuilder.Entity<Estado>(entity =>
+            {
+                entity.HasKey(e => e.IdEstado)
+                    .HasName("PK__Estado__FBB0EDC13590E463");
+
+                entity.ToTable("Estado");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdPaisNavigation)
+                    .WithMany(p => p.Estados)
+                    .HasForeignKey(d => d.IdPais)
+                    .HasConstraintName("FK__Estado__IdPais__38996AB5");
+            });
+
+            modelBuilder.Entity<Municipio>(entity =>
+            {
+                entity.HasKey(e => e.IdMunicipio)
+                    .HasName("PK__Municipi__6100597884DF82B9");
+
+                entity.ToTable("Municipio");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdEstadoNavigation)
+                    .WithMany(p => p.Municipios)
+                    .HasForeignKey(d => d.IdEstado)
+                    .HasConstraintName("FK__Municipio__IdEst__3B75D760");
+            });
+
+            modelBuilder.Entity<Pai>(entity =>
+            {
+                entity.HasKey(e => e.IdPais)
+                    .HasName("PK__Pais__FC850A7BD1E55615");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Rol>(entity =>
             {
                 entity.HasKey(e => e.IdRol)

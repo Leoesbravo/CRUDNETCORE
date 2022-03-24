@@ -5,6 +5,11 @@ namespace DL
 {
     public partial class Usuario
     {
+        public Usuario()
+        {
+            Direccions = new HashSet<Direccion>();
+        }
+
         public int IdUsuario { get; set; }
         public string? UserName { get; set; }
         public string? Nombre { get; set; }
@@ -22,5 +27,6 @@ namespace DL
         public byte[]? Imagen { get; set; }
 
         public virtual Rol? IdRolNavigation { get; set; }
+        public virtual ICollection<Direccion> Direccions { get; set; }
     }
 }

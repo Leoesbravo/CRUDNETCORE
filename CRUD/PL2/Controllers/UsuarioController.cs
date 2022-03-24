@@ -19,10 +19,19 @@ namespace PL.Controllers
         public ActionResult Form(int Idusuario)
         {
             ML.Usuario usuario = new ML.Usuario();
+            ML.Result resultPaises = BL.Pais.GetAll();
+            usuario.Direccion = new ML.Direccion();
+            usuario.Direccion.Colonia = new ML.Colonia();
+            usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+            usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+            usuario.Direccion.Colonia.Municipio.Estado.Pais = new ML.Pais();
+
+            usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPaises.Objects;
 
             ML.Result resultUsuario = BL.Rol.GetAll();
             usuario.Rol = new ML.Rol();
             usuario.Rol.Roles = resultUsuario.Objects;
+
             //prueba
             if (Idusuario == 0) //Add
             {
@@ -98,6 +107,25 @@ namespace PL.Controllers
             }
             return PartialView("Modal");
 
+        }
+
+        public JsonResult GetEstado(int IdPais)
+        {
+            var result = BL.Estado.GetByIdPais(IdPais);
+
+            return Json(result.Objects, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+        public JsonResult GetMunicipio(int IdEstado)
+        {
+            var result = BL.Municipio.MunicipioGetByIdEstado(IdEstado);
+
+            return Json(result.Objects, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+        public JsonResult GetColonia(int IdMunicipio)
+        {
+            var result = BL.Colonia.ColoniaGetByIdMunicipio(IdMunicipio);
+
+            return Json(result.Objects, new Newtonsoft.Json.JsonSerializerSettings());
         }
     }
 }
