@@ -17,7 +17,7 @@ namespace BL
             {
                 using (DLAzure.lbravoContext context = new DLAzure.lbravoContext())
                 {
-                    var estados = context.Estados.FromSqlRaw($"UsuarioGetById {IdPais}").ToList();
+                    var estados = context.Estados.FromSqlRaw($"EstadoGetById {IdPais}").ToList();
                     result.Objects = new List<object>();
 
                     if (estados != null)

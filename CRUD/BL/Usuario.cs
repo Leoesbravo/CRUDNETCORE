@@ -1,8 +1,10 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ML;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -126,8 +128,7 @@ namespace BL
             {
                 using (DLAzure.lbravoContext  context = new DLAzure.lbravoContext())
                 {
-
-                    var query = context.Database.ExecuteSqlRaw($"UsuarioAdd {usuario.UserName},  {usuario.ApellidoPaterno}, {usuario.ApellidoMaterno}, {usuario.Email},  {usuario.Sexo}, {usuario.Telefono}, {usuario.Celular},  {usuario.FechaNacimiento}, {usuario.CURP}, {usuario.Imagen},  {usuario.Direccion.Calle},  {usuario.Direccion.NumeroExterior}, {usuario.Direccion.NumeroInterior}, {usuario.Direccion.Colonia.IdColonia}, {usuario.Password}, {usuario.Rol.IdRol}");
+                    var query = context.Database.ExecuteSqlRaw($"UsuarioAdd '{usuario.UserName}',  '{usuario.Nombre}', '{usuario.ApellidoPaterno}', '{usuario.ApellidoMaterno}',  '{usuario.Email}', '{usuario.Sexo}', '{usuario.Telefono}',  '{usuario.Celular}', '{usuario.FechaNacimiento}', '{usuario.CURP}',  {usuario.Imagen},  '{usuario.Direccion.Calle}', '{usuario.Direccion.NumeroExterior}', '{usuario.Direccion.NumeroInterior}', {usuario.Direccion.Colonia.IdColonia}, '{usuario.Password}', {usuario.Estatus}, {usuario.Rol.IdRol}");
 
 
                     if (query >= 1)
@@ -209,5 +210,7 @@ namespace BL
 
             return result;
         }
+
+      
     }
 }

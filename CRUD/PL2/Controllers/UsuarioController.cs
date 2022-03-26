@@ -1,5 +1,6 @@
 ﻿using DL;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace PL.Controllers
 {
@@ -15,6 +16,19 @@ namespace PL.Controllers
 
             return View(usuario);
         }
+        public byte[] ConvertToBytes(IFormFile Imagen)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Imagen.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                string s = Convert.ToBase64String(fileBytes);
+
+                return fileBytes;
+            }
+        }
+
+
         [HttpGet]
         public ActionResult Form(int Idusuario)
         {
@@ -58,6 +72,12 @@ namespace PL.Controllers
         {
             ML.Result result = new ML.Result();
 
+            IFormFile file = Request.Form.Files["ImagenData"];
+
+            if (file != null)
+            {
+                usuario.Imagen = ConvertToBytes(file);
+            }
             if (usuario.IdUsuario == 0)
             {
                 result = BL.Usuario.Add(usuario);
@@ -88,6 +108,7 @@ namespace PL.Controllers
 
             return PartialView("Modal");
         }
+    
         public ActionResult Delete(int IdUsuario)
         {
             ML.Usuario usuario = new ML.Usuario();
@@ -113,19 +134,19 @@ namespace PL.Controllers
         {
             var result = BL.Estado.GetByIdPais(IdPais);
 
-            return Json(result.Objects, new Newtonsoft.Json.JsonSerializerSettings());
+            return Json(result.Objects);
         }
         public JsonResult GetMunicipio(int IdEstado)
         {
             var result = BL.Municipio.MunicipioGetByIdEstado(IdEstado);
 
-            return Json(result.Objects, new Newtonsoft.Json.JsonSerializerSettings());
+            return Json(result.Objects);
         }
         public JsonResult GetColonia(int IdMunicipio)
         {
             var result = BL.Colonia.ColoniaGetByIdMunicipio(IdMunicipio);
 
-            return Json(result.Objects, new Newtonsoft.Json.JsonSerializerSettings());
+            return Json(result.Objects);
         }
     }
 }

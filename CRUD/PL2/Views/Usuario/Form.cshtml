@@ -106,12 +106,6 @@
                         </div>
                         <br>
                          <div class="col-md-3">
-                            @Html.Label("Imagen")
-                            @Html.TextBoxFor(model => model.Imagen, new { @class = "form-control", @id = "txtEmail" })
-                            @Html.ValidationMessageFor(model => model.Imagen, null, new { @class = "text-danger" })
-                        </div>
-                        <br>
-                         <div class="col-md-3">
                             @Html.Label("Calle")
                             @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control", @id = "txtEmail" })
                             @Html.ValidationMessageFor(model => model.Direccion.Calle, null, new { @class = "text-danger" })
@@ -161,7 +155,6 @@
                             @Html.Label("Estado")
                             @if (Model.Direccion.Colonia.Municipio.Estado.Estados == null)
                             {
-                                @*model.Categoria.IdCategoria*@
                                 @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(string.Empty, "Value", "Text"), "Selecciona un Estado", htmlAttributes: new { id = "ddlEstado", @class = "form-control" })
 
                             }
@@ -184,6 +177,20 @@
                                 @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais, null, new { @class = "text-danger" })
                             }
                         </div>
+                         <div class="col-md-4">
+                            @Html.LabelFor(model => model.Imagen)
+                            <input type="file" name="ImagenData" onchange="Previsualizar(this);">
+                            @if (Model.Imagen != null)
+                            {
+
+                                <img id="ImagenPreview" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Imagen)" width="200" height="200" />
+                            }
+                            else
+                            {
+                                <img id="ImagenPreview" src="~/Images/FotoVacia.png" style=" height:200px; width:200px;" />
+                            }
+                            @Html.ValidationMessageFor(model => model.Imagen)
+                        </div>
 
                     </div>
                     <div class="form-group">
@@ -201,8 +208,18 @@
 @section Scripts
 {
 
-<script src="~/lib/jquery/dist/jquerty.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
+
+      function Previsualizar(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ImagenPreview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     $(document).ready(function () {
         $("#ddlPais").change(function () {
@@ -216,8 +233,8 @@
                     $("#ddlEstado").append('<option value="0">' + 'Seleccione una opción' + '</option>');
                     $.each(estados, function (i, estados) {
                         $("#ddlEstado").append('<option value="'
-                                                   + estados.IdEstado + '">'
-                                                   + estados.Nombre + '</option>');
+                                                   + estados.idEstado + '">'
+                                                   + estados.nombre + '</option>');
                     });
                 },
                 error: function (ex) {
@@ -237,8 +254,8 @@
                     $("#ddlMunicipio").append('<option value="0">' + 'Seleccione una opción' + '</option>');
                     $.each(municipios, function (i, municipios) {
                         $("#ddlMunicipio").append('<option value="'
-                                                   + municipios.IdMunicipio + '">'
-                                                   + municipios.Nombre + '</option>');
+                                                   + municipios.idMunicipio + '">'
+                                                   + municipios.nombre + '</option>');
                     });
                 },
                 error: function (ex) {
@@ -258,8 +275,8 @@
                     $("#ddlColonia").append('<option value="0">' + 'Seleccione una opción' + '</option>');
                     $.each(colonias, function (i, colonias) {
                         $("#ddlColonia").append('<option value="'
-                                                   + colonias.IdColonia + '">'
-                                                   + colonias.Nombre + '</option>');
+                                                   + colonias.idColonia + '">'
+                                                   + colonias.nombre + '</option>');
                     });
                 },
                 error: function (ex) {
