@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL2", "PL2\PL2.csproj", "{B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ML", "ML\ML.csproj", "{C21290AE-DC45-44B6-BEDB-84E895EE4F75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLAzure", "DLAzure\DLAzure.csproj", "{AB7CB1FE-AD81-44FB-94B5-64A63D6CE954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DLAzure", "DLAzure\DLAzure.csproj", "{AB7CB1FE-AD81-44FB-94B5-64A63D6CE954}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{74F45835-5F8F-432E-95A0-72498295842E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{C71F0BD1-232F-4CE1-81B0-9986515361AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{AB7CB1FE-AD81-44FB-94B5-64A63D6CE954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB7CB1FE-AD81-44FB-94B5-64A63D6CE954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB7CB1FE-AD81-44FB-94B5-64A63D6CE954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74F45835-5F8F-432E-95A0-72498295842E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F45835-5F8F-432E-95A0-72498295842E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F45835-5F8F-432E-95A0-72498295842E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F45835-5F8F-432E-95A0-72498295842E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71F0BD1-232F-4CE1-81B0-9986515361AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71F0BD1-232F-4CE1-81B0-9986515361AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71F0BD1-232F-4CE1-81B0-9986515361AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71F0BD1-232F-4CE1-81B0-9986515361AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

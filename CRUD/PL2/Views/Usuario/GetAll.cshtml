@@ -53,6 +53,17 @@
                             <td>@usuario.Rol.IdRol</td>
                             <td>@usuario.Email</td>
                             <td>@usuario.CURP</td>
+                             <td>
+                                @if (usuario.Imagen == null)
+                                {
+                              
+                                    <img id="ImagenPreview" src="~/Images/FotoVacia.png" style=" height:50px; width:50px;" />
+                                }
+                                else
+                                {
+                                    <img id="ImagenPreview" src="data:image/jpeg;base64,@Convert.ToBase64String(usuario.Imagen)" width="50" height="50" />
+                                }
+                            </td>
 
                             <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Usuario", new { IdUsuario = usuario.IdUsuario })" onclick="return confirm('¿Estas seguro que deseas eliminar este registro?');"></a></td>
                         </tr>
